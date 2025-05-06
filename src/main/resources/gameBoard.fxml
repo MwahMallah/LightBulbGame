@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.effect.Glow?>
+<StackPane
+        xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:id="gamePane"
+        fx:controller="org.vut_ija_project.ija.ViewModel.GameBoardVM"
+        style="-fx-border-color: yellow; -fx-border-width: 4; -fx-border-radius: 5;">
+    <Canvas fx:id="gameCanvas">
+        <effect>
+            <Glow level="0.8"/>
+        </effect>
+    </Canvas>
+</StackPane>

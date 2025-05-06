@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.2-ea"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.vut_ija_project.ija.ViewModel.GameEndPopupVM"
+           style="-fx-background-color: rgba(0, 0, 0, 0.6);"
+           alignment="CENTER"
+           visible="false" fx:id="popupRoot">
+
+    <VBox spacing="20" alignment="CENTER"
+          style="-fx-background-color: #444; -fx-padding: 30; -fx-border-radius: 10; -fx-background-radius: 10;">
+        <Label text="You won!" style="-fx-text-fill: white; -fx-font-size: 24;"/>
+        <Button text="New game" onAction="#onNewGameClicked"/>
+    </VBox>
+
+</StackPane>
