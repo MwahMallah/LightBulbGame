@@ -21,6 +21,10 @@ public class GameController implements Subscriber {
         currentGame = Game.getGame();
         currentGame.subscribe(this);
         nodes = currentGame.getNodes();
+        newGameRows = 10;
+        newGameCols = 10;
+        newGameBulbs = 3;
+        newGameLinks = 15;
     }
 
     public static GameController getController() {
@@ -60,10 +64,22 @@ public class GameController implements Subscriber {
         Game.createGameFromTemplate(newGame);
     }
 
+    private int newGameRows;
+    private int newGameCols;
+    private int newGameBulbs;
+    private int newGameLinks;
     public void createNewRandomGame() {
-        var newGame = Game.create(10, 10);
+        createNewRandomGame(newGameRows, newGameCols, newGameBulbs, newGameLinks);
+    }
+
+    public void createNewRandomGame(int rows, int cols, int bulbs, int links) {
+        newGameRows = rows;
+        newGameCols = cols;
+        newGameLinks = links;
+        newGameBulbs = bulbs;
+        var newGame = Game.create(rows, cols);
         Game.createGameFromTemplate(newGame);
-        newGame.fillBoardRandomly(3, 15);
+        newGame.fillBoardRandomly(bulbs, links);
     }
 
     @Override

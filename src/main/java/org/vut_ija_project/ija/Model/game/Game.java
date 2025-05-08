@@ -16,6 +16,8 @@ import org.vut_ija_project.ija.Model.common.Position;
 import org.vut_ija_project.ija.Model.common.Side;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Game implements Publisher {
     private final GameNode[][] nodes;
@@ -120,14 +122,12 @@ public class Game implements Publisher {
     }
 
     private boolean checkGameIsFinished() {
-        var stream = Arrays.stream(nodes)
-                .flatMap(Arrays::stream)
-                .filter(GameNode::isBulb).toList();
-
-        return Arrays.stream(nodes)
+        List<GameNode> bulbs = Arrays.stream(nodes)
                 .flatMap(Arrays::stream)
                 .filter(GameNode::isBulb)
-                .allMatch(GameNode::isPowered);
+                .toList();
+
+        return !bulbs.isEmpty() && bulbs.stream().allMatch(GameNode::isPowered);
     }
 
     public void fillBoardRandomly(int nBulbs, int nLinks) {
