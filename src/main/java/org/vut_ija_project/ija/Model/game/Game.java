@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import org.vut_ija_project.ija.Common.Events.Event;
 import org.vut_ija_project.ija.Common.Events.FinishedGameEvent;
+import org.vut_ija_project.ija.Common.Events.GameSetEvent;
 import org.vut_ija_project.ija.Common.Events.NewGameEvent;
 import org.vut_ija_project.ija.Common.Events.PowerEvent.NodePoweredEvent;
 import org.vut_ija_project.ija.Common.Events.PowerEvent.NodeUnpoweredEvent;
@@ -112,9 +113,6 @@ public class Game implements Publisher {
         var node = nodes[p.getRow()][p.getCol()];
         node.turn();
         updateLight();
-        if (checkGameIsFinished()) {
-            publishGameEndedEvent();
-        }
     }
 
     private void publishGameEndedEvent() {
@@ -122,6 +120,10 @@ public class Game implements Publisher {
     }
 
     private boolean checkGameIsFinished() {
+        var stream = Arrays.stream(nodes)
+                .flatMap(Arrays::stream)
+                .filter(GameNode::isBulb).toList();
+
         return Arrays.stream(nodes)
                 .flatMap(Arrays::stream)
                 .filter(GameNode::isBulb)
@@ -177,6 +179,8 @@ public class Game implements Publisher {
 
         fillLeftOverLinks(nLinks, placedNodes, used);
         rotateNodesRandomly(placedNodes);
+
+        publishGameSet();
         init();
     }
 
@@ -250,6 +254,12 @@ public class Game implements Publisher {
             timeline.getKeyFrames().add(keyFrame);
         }
 
+        timeline.setOnFinished(e -> {
+            if (checkGameIsFinished()) {
+                publishGameEndedEvent();
+            }
+        });
+
         timeline.play();
     }
 
@@ -290,6 +300,9 @@ public class Game implements Publisher {
         }
     }
 
+    private void publishGameSet() {
+        publishEvent(new GameSetEvent());
+    }
     private void publishNodeUnpowered(GameNode node) {
         publishEvent(new NodeUnpoweredEvent(node));
     }

@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import org.vut_ija_project.ija.Common.Events.Event;
+import org.vut_ija_project.ija.Common.Events.GameSetEvent;
 import org.vut_ija_project.ija.Common.Events.NewGameEvent;
 import org.vut_ija_project.ija.Common.Subscriber;
 import org.vut_ija_project.ija.Controller.GameController;
@@ -150,8 +151,7 @@ public class GameBoardVM implements Subscriber {
 
     @Override
     public boolean supports(Event.EventType type) {
-        System.out.println(type);
-        return type == Event.EventType.NEW_GAME;
+        return type == Event.EventType.NEW_GAME || type == Event.EventType.GAME_SET;
     }
 
     @Override
@@ -161,6 +161,10 @@ public class GameBoardVM implements Subscriber {
             newGame.subscribe(this);
             showGame(newGame);
             System.out.println("Started new game");
+        }
+
+        if (event instanceof GameSetEvent) {
+            showGame(null);
         }
     }
 }

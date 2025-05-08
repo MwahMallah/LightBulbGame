@@ -60,6 +60,12 @@ public class GameController implements Subscriber {
         Game.createGameFromTemplate(newGame);
     }
 
+    public void createNewRandomGame() {
+        var newGame = Game.create(10, 10);
+        Game.createGameFromTemplate(newGame);
+        newGame.fillBoardRandomly(3, 15);
+    }
+
     @Override
     public boolean supports(Event.EventType type) {
         return type == Event.EventType.NEW_GAME;
