@@ -17,6 +17,9 @@
         <center>
             <fx:include source="gameBoard.fxml"/>
         </center>
+        <left>
+            <fx:include source="settingsForm.fxml"/>
+        </left>
     </BorderPane>
 
     <fx:include source="gameEndPopup.fxml" fx:id="popup"/>

@@ -13,7 +13,8 @@
         xmlns:fx="http://javafx.com/fxml"
         fx:id="gamePane"
         fx:controller="org.vut_ija_project.ija.ViewModel.GameBoardVM"
-        style="-fx-border-color: yellow; -fx-border-width: 4; -fx-border-radius: 5;">
+        style="-fx-border-color: yellow; -fx-border-width: 4; -fx-border-radius: 5;"
+        alignment="CENTER">
     <Canvas fx:id="gameCanvas">
         <effect>
             <Glow level="0.8"/>

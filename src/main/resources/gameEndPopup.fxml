@@ -6,17 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.effect.DropShadow?>
 <StackPane xmlns="http://javafx.com/javafx/17.0.2-ea"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.vut_ija_project.ija.ViewModel.GameEndPopupVM"
-           style="-fx-background-color: rgba(0, 0, 0, 0.6);"
+           stylesheets="@styles.css"
            alignment="CENTER"
            visible="false" fx:id="popupRoot">
+    <Region style="-fx-background-color: rgba(0, 0, 0, 0.5);"
+            StackPane.alignment="CENTER"
+            maxWidth="Infinity" maxHeight="Infinity" />
 
     <VBox spacing="20" alignment="CENTER"
-          style="-fx-background-color: #444; -fx-padding: 30; -fx-border-radius: 10; -fx-background-radius: 10;">
-        <Label text="You won!" style="-fx-text-fill: white; -fx-font-size: 24;"/>
+          style="-fx-background-color: rgba(68, 68, 68, 0.3); -fx-padding: 30; -fx-border-radius: 10; -fx-background-radius: 10;"
+          effect="$dropShadow">
+        <Label text="You won!" style="-fx-text-fill: yellow; -fx-font-size: 27;"/>
         <Button text="New game" onAction="#onNewGameClicked"/>
     </VBox>
 
+    <fx:define>
+        <DropShadow fx:id="dropShadow" radius="10" color="black"/>
+    </fx:define>
 </StackPane>

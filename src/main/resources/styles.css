@@ -1,0 +1,8 @@
+/* styles.css */
+#popupRoot {
+    -fx-background-color: transparent;
+}
+
+#popupRoot > .viewport {
+    -fx-background-color: transparent;
+}

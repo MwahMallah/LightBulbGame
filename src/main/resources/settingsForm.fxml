@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 20;" fx:id="gameSettingsForm">
+
+        <Label text="Width:" style="-fx-text-fill: white;" />
+        <TextField fx:id="widthField" promptText="Enter width"/>
+
+        <Label text="Height:" style="-fx-text-fill: white;" />
+        <TextField fx:id="heightField" promptText="Enter height"/>
+
+        <Label text="Lamps:" style="-fx-text-fill: white;" />
+        <TextField fx:id="lampCountField" promptText="Enter lamp count"/>
+
+        <Label text="Wires:" style="-fx-text-fill: white;" />
+        <TextField fx:id="wireCountField" promptText="Enter wire count"/>
+
+        <Button text="Start Game" fx:id="startGameButton"/>
+    </VBox>
+</AnchorPane>
