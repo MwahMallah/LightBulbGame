@@ -70,10 +70,21 @@ public abstract class GameEntityVM implements Subscriber {
         gc.restore(); // Restore initial state
     }
 
-    public void rotate() {
-        rotationAngle = (rotationAngle + 90) % 360;
-        draw();
+    public void sendRotateToController() {
         gameController.rotate(this.entity);
+    }
+
+    public void rotate() {
+        rotateByAngle(90);
+    }
+
+    public void rotateBack() {
+        rotateByAngle(-90);
+    }
+
+    private void rotateByAngle(int angle) {
+        rotationAngle = (rotationAngle + angle) % 360;
+        draw();
     }
 
     public void clear() {

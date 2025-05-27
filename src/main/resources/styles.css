@@ -6,3 +6,25 @@
 #popupRoot > .viewport {
     -fx-background-color: transparent;
 }
+
+.nav-button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.3, 0, 2);
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+    -fx-transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.4, 0, 3);
+}
+
+.nav-button:pressed {
+    -fx-background-color: #c0c0c0;
+    -fx-translate-y: 1; /* slight press effect */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.4, 0, 1);
+}

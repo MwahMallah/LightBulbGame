@@ -3,6 +3,8 @@ package org.vut_ija_project.ija.Controller;
 import org.vut_ija_project.ija.Common.Events.Event;
 import org.vut_ija_project.ija.Common.Events.NewGameEvent;
 import org.vut_ija_project.ija.Common.Subscriber;
+import org.vut_ija_project.ija.Controller.command.CommandManager;
+import org.vut_ija_project.ija.Controller.command.RotateCommand;
 import org.vut_ija_project.ija.Controller.entity.GameEntity;
 import org.vut_ija_project.ija.Model.common.GameNode;
 import org.vut_ija_project.ija.Model.common.Position;
@@ -14,12 +16,14 @@ import java.util.Arrays;
 
 public class GameController implements Subscriber {
     private static GameController controller;
+    private final CommandManager commandManager;
 
     private Game currentGame;
     private GameNode[][] nodes;
     private GameController() {
         currentGame = Game.getGame();
         currentGame.subscribe(this);
+        commandManager = new CommandManager();
         nodes = currentGame.getNodes();
         newGameRows = 10;
         newGameCols = 10;
@@ -33,6 +37,7 @@ public class GameController implements Subscriber {
         }
         return controller;
     }
+
     public GameEntity[][] getGameEntities() {
         int rows = currentGame.rows();
         int cols = currentGame.cols();
@@ -49,7 +54,17 @@ public class GameController implements Subscriber {
     }
 
     public void rotate(GameEntity entity) {
-        currentGame.rotate(new Position(entity.row(), entity.col()));
+        var pos = new Position(entity.row(), entity.col());
+        var command = new RotateCommand(currentGame, pos);
+        commandManager.executeCommand(command);
+    }
+
+    public void undo() {
+        commandManager.undo();
+    }
+
+    public void redo() {
+        commandManager.redo();
     }
 
     public void saveCurrentGame(File toFile) {

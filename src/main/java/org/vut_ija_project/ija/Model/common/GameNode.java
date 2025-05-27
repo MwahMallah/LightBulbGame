@@ -64,11 +64,15 @@ public class GameNode {
         return type == Type.Link;
     }
     public boolean isEmpty() {return type == Type.Empty;}
-    
 
     public void turn() {
         connectedSides = connectedSides.stream().map(Side::turn).collect(Collectors.toSet());
     }
+
+    public void turnBack() {
+        connectedSides = connectedSides.stream().map(Side::turnBack).collect(Collectors.toSet());
+    }
+
     public void rotateRandomly() {
         var numOfRotation = new Random().nextInt(4);
         for (int i = 0; i < numOfRotation; i++) {

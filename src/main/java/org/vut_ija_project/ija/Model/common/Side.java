@@ -14,39 +14,31 @@ public enum Side {
     }
 
     public Side turn() {
+        return getSide(SOUTH, EAST, WEST, NORTH);
+    }
+    public Side turnBack() {
+        return getSide(NORTH, WEST, EAST, SOUTH);
+    }
+
+    private Side getSide(Side fromEast, Side fromNorth, Side fromSouth, Side fromWest) {
         switch (this) {
             case EAST -> {
-                return SOUTH;
+                return fromEast;
             }
             case NORTH -> {
-                return EAST;
+                return fromNorth;
             }
             case SOUTH -> {
-                return WEST;
+                return fromSouth;
             }
             case WEST -> {
-                return NORTH;
+                return fromWest;
             }
         }
         return null;
     }
 
     public Side opposite() {
-        switch (this) {
-            case EAST -> {
-                return WEST;
-            }
-            case NORTH -> {
-                return SOUTH;
-            }
-            case SOUTH -> {
-                return NORTH;
-            }
-            case WEST -> {
-                return EAST;
-            }
-        }
-
-        return null;
+        return getSide(WEST, SOUTH, NORTH, EAST);
     }
 }

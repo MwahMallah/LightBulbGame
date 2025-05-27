@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.vut_ija_project.ija.ViewModel.GameControlVM"
+            stylesheets="@styles.css"
+            alignment="TOP_CENTER" spacing="20">
+
+    <Button text="Back"
+            fx:id="backBtn"
+            prefWidth="100"
+            styleClass="nav-button"/>
+
+    <Button text="Forward"
+            fx:id="forwardBtn"
+            prefWidth="100"
+            styleClass="nav-button"/>
+</HBox>

@@ -3,10 +3,7 @@ package org.vut_ija_project.ija.Model.game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import org.vut_ija_project.ija.Common.Events.Event;
-import org.vut_ija_project.ija.Common.Events.FinishedGameEvent;
-import org.vut_ija_project.ija.Common.Events.GameSetEvent;
-import org.vut_ija_project.ija.Common.Events.NewGameEvent;
+import org.vut_ija_project.ija.Common.Events.*;
 import org.vut_ija_project.ija.Common.Events.PowerEvent.NodePoweredEvent;
 import org.vut_ija_project.ija.Common.Events.PowerEvent.NodeUnpoweredEvent;
 import org.vut_ija_project.ija.Common.Publisher;
@@ -114,6 +111,14 @@ public class Game implements Publisher {
     public void rotate(Position p) {
         var node = nodes[p.getRow()][p.getCol()];
         node.turn();
+        publishNodeTurned(node);
+        updateLight();
+    }
+
+    public void rotateBack(Position p) {
+        var node = nodes[p.getRow()][p.getCol()];
+        node.turnBack();
+        publishNodeTurnedBack(node);
         updateLight();
     }
 
@@ -313,6 +318,13 @@ public class Game implements Publisher {
 
     private void publishGameChanged(Game newGame) {
         publishEvent(new NewGameEvent(newGame));
+    }
+    private void publishNodeTurnedBack(GameNode node) {
+        publishEvent(new NodeTurnedBackEvent(node));
+    }
+
+    private void publishNodeTurned(GameNode node) {
+        publishEvent(new NodeTurnedEvent(node));
     }
 
     public void publishEvent(Event event) {

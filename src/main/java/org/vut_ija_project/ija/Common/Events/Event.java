@@ -7,6 +7,8 @@ public abstract class Event {
         NODE_UNPOWERED,
         NEW_GAME,
         GAME_FINISHED,
-        GAME_SET
+        GAME_SET,
+        NODE_TURNED,
+        NODE_TURNED_BACK
     }
 }

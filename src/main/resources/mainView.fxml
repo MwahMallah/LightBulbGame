@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.control.Button?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1"
            xmlns="http://javafx.com/javafx/17.0.2-ea"
            fx:id="rootStackPane">
@@ -15,7 +13,10 @@
             <fx:include source="menu.fxml"/>
         </top>
         <center>
-            <fx:include source="gameBoard.fxml"/>
+            <VBox spacing="10" alignment="TOP_CENTER" style="-fx-padding: 10;">
+                <fx:include source="gameControl.fxml"/>
+                <fx:include source="gameBoard.fxml"/>
+            </VBox>
         </center>
         <left>
             <fx:include source="settingsForm.fxml"/>

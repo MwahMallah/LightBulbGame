@@ -13,4 +13,6 @@ module org.vut_ija_project.ija {
     opens org.vut_ija_project.ija.Controller to javafx.fxml;
     exports org.vut_ija_project.ija.ViewModel;
     opens org.vut_ija_project.ija.ViewModel to javafx.fxml;
+    exports org.vut_ija_project.ija.Controller.command;
+    opens org.vut_ija_project.ija.Controller.command to javafx.fxml;
 }

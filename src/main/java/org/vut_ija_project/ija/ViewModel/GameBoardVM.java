@@ -6,12 +6,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
-import org.vut_ija_project.ija.Common.Events.Event;
-import org.vut_ija_project.ija.Common.Events.GameSetEvent;
-import org.vut_ija_project.ija.Common.Events.NewGameEvent;
+import org.vut_ija_project.ija.Common.Events.*;
 import org.vut_ija_project.ija.Common.Subscriber;
 import org.vut_ija_project.ija.Controller.GameController;
 import org.vut_ija_project.ija.Controller.entity.GameEntity;
+import org.vut_ija_project.ija.Model.common.Position;
 import org.vut_ija_project.ija.Model.game.Game;
 import org.vut_ija_project.ija.ViewModel.GameEntityVM.GameEntityVM;
 
@@ -61,7 +60,7 @@ public class GameBoardVM implements Subscriber {
     private void setEventListeners() {
         gameCanvas.setOnMouseMoved(this::lightSquare);
         gameCanvas.setOnMouseExited(event -> drawInitialState());
-        gameCanvas.setOnMouseClicked(this::rotateEntity);
+        gameCanvas.setOnMouseClicked(this::onCellClicked);
     }
 
     private void drawInitialState() {
@@ -142,16 +141,27 @@ public class GameBoardVM implements Subscriber {
         gameCanvas.setHeight(rows * tileSize);
     }
 
-    private void rotateEntity(MouseEvent event) {
+    private void onCellClicked(MouseEvent event) {
         var mouseRow = (int) (event.getY() / tileSize);
         var mouseCol = (int) (event.getX() / tileSize);
 
-        entities[mouseRow][mouseCol].rotate();
+        entities[mouseRow][mouseCol].sendRotateToController();
+    }
+
+    private void rotateEntity(Position position) {
+        entities[position.getRow()][position.getCol()].rotate();
+    }
+
+    private void rotateEntityBack(Position position) {
+        entities[position.getRow()][position.getCol()].rotateBack();
     }
 
     @Override
     public boolean supports(Event.EventType type) {
-        return type == Event.EventType.NEW_GAME || type == Event.EventType.GAME_SET;
+        return type == Event.EventType.NEW_GAME
+                || type == Event.EventType.GAME_SET
+                || type == Event.EventType.NODE_TURNED_BACK
+                || type == Event.EventType.NODE_TURNED;
     }
 
     @Override
@@ -165,6 +175,16 @@ public class GameBoardVM implements Subscriber {
 
         if (event instanceof GameSetEvent) {
             showGame(null);
+        }
+
+        if (event instanceof NodeTurnedBackEvent) {
+            var pos = ((NodeTurnedBackEvent) event).getPosition();
+            rotateEntityBack(pos);
+        }
+
+        if (event instanceof NodeTurnedEvent) {
+            var pos = ((NodeTurnedEvent) event).getPosition();
+            rotateEntity(pos);
         }
     }
 }
